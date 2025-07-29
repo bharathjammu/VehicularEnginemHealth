@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            text-align: center;
+            padding-top: 60px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 38px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 40px;
+            animation: fadeInUp 1.2s ease-in-out;
+        }
+
+        li {
+            margin: 20px 0;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            background-color: #1e90ff;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #00bfff;
+        }
+
+        .info {
+            margin-top: 50px;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 16px;
+            color: #e0e0e0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🚀 Welcome Admin!</h2>{% csrf_token %}
+
+    <ul>
+        <li><a href="{% url 'upload_dataset' %}">📤 Upload Dataset</a></li>
+        <br>
+        <li><a href="{% url 'train_model' %}">📊 View Accuracy Values</a></li>
+        <br>
+        <li><a href="{% url 'view_users' %}">👥 View Users</a></li>
+        <br>
+        <li><a href="{% url 'logout' %}">🚪 Logout</a></li>
+    </ul>
+
+    <div class="info">
+        <h3>🔧 Engine Health Management</h3>
+        <p>As an admin, you're responsible for managing the ML pipeline — uploading engine sensor datasets, training models, and overseeing user activity.</p>
+        <p>This system helps in identifying faulty engine behavior early by analyzing vibration, temperature, fuel rate, and pressure data using AI models.</p>
+        <p>Ensure the models are frequently trained with updated data for the most accurate engine health predictions.</p>
+        <p> Mansoor@Copy Right 2025</p>
+    </div>
+
+</body>
+</html>
+

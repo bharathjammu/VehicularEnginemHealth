@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Dataset</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #485563, #29323c);
+            color: #ffffff;
+            text-align: center;
+            padding-top: 60px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 32px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        form {
+            margin-top: 30px;
+            display: inline-block;
+            padding: 25px 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            animation: fadeInUp 1.2s ease-in-out;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            background: #fff;
+            color: #000;
+        }
+
+        button {
+            padding: 10px 25px;
+            background-color: #1abc9c;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #16a085;
+        }
+
+        .error {
+            color: #ffb3b3;
+            font-weight: bold;
+        }
+
+        .message {
+            color: #a3f7bf;
+            font-weight: bold;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #ffdd57;
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .info {
+            max-width: 700px;
+            margin: 50px auto 0;
+            font-size: 16px;
+            color: #e0e0e0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h2>📤 Upload Dataset</h2>
+
+    {% if error %}
+        <p class="error">❌ {{ error }}</p>
+    {% endif %}
+
+    {% if message %}
+        <p class="message">✅ {{ message }}</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Select Dataset (CSV):</label>
+        <input type="file" name="dataset" required><br>
+        <button type="submit">Upload & Train</button>
+    </form>
+
+    {% if accuracies %}
+        <h3 style="margin-top:40px;">📈 Model Accuracy (in %)</h3>
+        <ul>
+            {% for name, value in accuracies.items %}
+                <li><strong>{{ name|upper }}:</strong> {{ value }}%</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <a href="{% url 'admin_dashboard' %}">⬅ Back to Index</a>
+
+    <div class="info">
+        <h3>🧠 Why Upload a Dataset?</h3>
+        <p>Uploading a new dataset trains our machine learning models using real-world engine sensor data — including RPM, vibration, fuel rate, pressure, and more.</p>
+        <p>This ensures that engine health predictions are accurate, timely, and based on the latest vehicular conditions.</p>
+        <p>Trained models will predict whether the engine is in good condition or needs urgent maintenance based on sensor inputs.</p>
+    </div>
+</body>
+</html>

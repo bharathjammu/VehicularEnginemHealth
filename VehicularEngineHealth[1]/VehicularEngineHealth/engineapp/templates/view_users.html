@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Registered Users</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #1f4037, #99f2c8);
+            color: #000;
+            text-align: center;
+            padding-top: 60px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 36px;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 90%;
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #dddddd;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0f7fa;
+        }
+
+        a {
+            color: #00695c;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 30px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .info {
+            margin: 50px auto 0;
+            max-width: 750px;
+            font-size: 16px;
+            color: #333333;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>👥 Registered Users</h2>
+
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Date of Birth</th>
+            <th>State</th>
+            {% comment %} <th>Action</th> {% endcomment %}
+        </tr>
+        {% for u in users %}
+        <tr>
+            <td>{{ u.user.username }}</td>
+            <td>{{ u.user.email }}</td>
+            <td>{{ u.phone }}</td>
+            <td>{{ u.dob }}</td>
+            <td>{{ u.state }}</td>
+            {% comment %} <td><a href="#">View Profile</a></td> {% endcomment %}
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">No users found.</td></tr>
+        {% endfor %}
+    </table>
+
+    <a href="{% url 'admin_dashboard' %}">⬅ Back to Dashboard</a>
+
+    <div class="info">
+        <h3>📋 Why Track Registered Users?</h3>
+        <p>This panel helps the admin monitor user engagement and access history for engine health predictions.</p>
+        <p>Tracking users ensures proper data flow, feedback gathering, and user accountability in predictive diagnostics.</p>
+        <p>All registered users can submit real-time sensor inputs and receive health reports for better engine maintenance.</p>
+    </div>
+
+</body>
+</html>

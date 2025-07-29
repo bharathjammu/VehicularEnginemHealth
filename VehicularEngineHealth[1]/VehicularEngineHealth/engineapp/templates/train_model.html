@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Train Models</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            color: #ffffff;
+            text-align: center;
+            padding: 60px 20px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        canvas {
+            animation: fadeInUp 1.5s ease-in-out;
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 100%;
+        }
+
+        .error {
+            color: #ffb3b3;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #ffdd57;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .info {
+            max-width: 700px;
+            margin: 50px auto 0;
+            font-size: 16px;
+            color: #f0f0f0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h2>📊 Trained Model Accuracies</h2>
+
+    {% if error %}
+        <p class="error">❌ {{ error }}</p>
+    {% endif %}
+
+    {% if accuracies %}
+        <canvas id="accuracyChart" width="600" height="400"></canvas>
+        <script>
+            const ctx = document.getElementById('accuracyChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: {{ chart_labels|safe }},
+                    datasets: [{
+                        label: 'Accuracy (%)',
+                        data: {{ chart_values|safe }},
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: "#ffffff"
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    {% endif %}
+
+    <a href="{% url 'admin_dashboard' %}">⬅ Back to Admin Dashboard</a>
+
+    <div class="info">
+        <h3>🧠 Why View Model Accuracies?</h3>
+        <p>After uploading the dataset, this chart shows how accurately each machine learning algorithm has learned to classify engine conditions.</p>
+        <p>Better accuracy helps predict engine issues such as overheating, excessive vibration, or fuel inefficiency early.</p>
+        <p>Use this insight to choose the most reliable model for live engine health predictions.</p>
+    </div>
+</body>
+</html>

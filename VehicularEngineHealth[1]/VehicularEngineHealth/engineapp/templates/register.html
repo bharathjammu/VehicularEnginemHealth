@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #2b5876, #4e4376);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding-top: 60px;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        form {
+            display: inline-block;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            animation: fadeInUp 1.2s ease-in-out;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"] {
+            width: 260px;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: none;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background-color: #00b894;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00a383;
+        }
+
+        .error {
+            color: #ffcccc;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #a8ffb0;
+            font-weight: bold;
+        }
+
+        a {
+            color: #ffdd57;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .info {
+            margin-top: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 16px;
+            color: #f0f0f0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h2>📝 User Registration</h2>
+
+    {% if error %}
+        <p class="error">❌ {{ error }}</p>
+    {% endif %}
+    {% if success %}
+        <p class="success">✅ {{ success }}</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label>Username:</label>
+        <input type="text" name="username" required>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+
+        <label>Password:</label>
+        <input type="password" name="password" required>
+
+        <label>Confirm Password:</label>
+        <input type="password" name="confirm_password" required>
+
+        <label>Phone Number:</label>
+        <input type="text" name="phone" required>
+
+        <label>Date of Birth:</label>
+        <input type="date" name="dob" required>
+
+        <label>State:</label>
+        <input type="text" name="state" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p style="margin-top: 20px;">Already have an account? <a href="{% url 'user_login' %}">Login here</a></p>
+
+    <div class="info">
+        <h3>🔐 Why Register?</h3>
+        <p>By registering, you gain access to the engine health prediction system powered by AI algorithms.</p>
+        <p>Using data like vibration, pressure, fuel rate, and temperature, the system tells you whether your engine is in good condition or requires maintenance.</p>
+        <p>Stay ahead of breakdowns, reduce repair costs, and enjoy safer rides by monitoring your engine’s health.</p>
+    </div>
+</body>
+</html>

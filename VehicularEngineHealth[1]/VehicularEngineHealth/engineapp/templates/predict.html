@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict Engine Condition</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #232526, #414345);
+            color: #f0f0f0;
+            text-align: center;
+            padding-top: 50px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #00e6e6;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        .form-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    width: 380px;
+    justify-content: flex-start;
+}
+
+.form-row label {
+    flex: 0 0 160px;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.form-row input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+
+        label {
+            display: inline-block;
+            width: 140px;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 8px;
+            margin-left: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 25px;
+            background-color: #00b894;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00997a;
+        }
+
+        hr {
+            margin: 40px auto;
+            width: 60%;
+            border: 1px solid #ccc;
+        }
+
+        h3 {
+            color: #ffcc00;
+            font-size: 24px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        p, ul {
+            font-size: 16px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li::before {
+            content: "🔧 ";
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #00d2ff;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .info {
+            max-width: 700px;
+            margin: 50px auto;
+            color: #ddd;
+            font-size: 15px;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🔍 Predict Engine Condition</h2>
+
+    {% if error %}
+        <p class="error">❌ {{ error }}</p>
+    {% endif %}
+
+    <form method="POST" class="form-grid">
+    {% csrf_token %}
+    <div class="form-row"><label>Rpm Reading :</label><input type="text" name="feature1" required></div>
+    <div class="form-row"><label>Engine Temp :</label><input type="text" name="feature2" required></div>
+    <div class="form-row"><label>Load :</label><input type="text" name="feature3" required></div>
+    <div class="form-row"><label>Throttle :</label><input type="text" name="feature4" required></div>
+    <div class="form-row"><label>Oil Pressure:</label><input type="text" name="feature5" required></div>
+    <div class="form-row"><label>Rate of Fuel :</label><input type="text" name="feature6" required></div>
+    <div class="form-row"><label>Speed :</label><input type="text" name="feature7" required></div>
+    <div class="form-row"><label>Oil Temperature :</label><input type="text" name="feature8" required></div>
+    <div class="form-row"><label>Engine Vibrations :</label><input type="text" name="feature9" required></div>
+    <div class="form-row"><label>Humidity :</label><input type="text" name="feature10" required></div>
+
+    <button type="submit">🔎 Predict</button>
+</form>
+
+
+    {% if condition %}
+        <hr>
+        <h3>🔧 Engine Condition: {{ condition }}</h3>
+        <p><strong>Recommendation:</strong> {{ recommendation }}</p>
+
+        {% if repairs %}
+            <h4>🛠️ Suggested Repairs:</h4>
+            <ul>
+                {% for item in repairs %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+
+    <a href="{% url 'user_dashboard' %}">⬅ Back to Dashboard</a>
+
+    <div class="info">
+        <h3>💡 What Does Prediction Do?</h3>
+        <p>This form takes live sensor readings like RPM, oil temp, and fuel rate to predict engine condition using AI models.</p>
+        <p>The prediction results help identify whether the engine is in a **Good** or **Faulty** state and provide relevant recommendations.</p>
+        <p>Enter accurate values to get the most reliable prediction and preventive maintenance suggestions.</p>
+    </div>
+
+</body>
+</html>

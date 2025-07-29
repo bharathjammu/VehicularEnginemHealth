@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Engine Info</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: #f1f1f1;
+            text-align: center;
+            padding-top: 60px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 34px;
+            color: #00d4ff;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 15px 0;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        strong {
+            color: #ffdd57;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #00e5ff;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #2e2e2e;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #3f3f3f;
+        }
+
+        .info {
+            margin-top: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 15px;
+            color: #cccccc;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🛠️ Engine Info</h2>
+
+    <p><strong>Status:</strong> {{ condition }}</p>
+    <p><strong>Message:</strong> {{ message }}</p>
+    <p><strong>Summary:</strong> {{ summary }}</p>
+
+    <a href="{% url 'user_dashboard' %}">⬅ Back to Dashboard</a>
+
+    <div class="info">
+        <h3>🔍 What This Means</h3>
+        <p>This page displays the condition of your vehicle's engine based on intelligent analysis.</p>
+        <p>The system interprets various sensor inputs and machine learning model results to give actionable insights.</p>
+        <p>Review the engine status and follow the recommendations to maintain peak engine health and avoid breakdowns.</p>
+    </div>
+
+</body>
+</html>

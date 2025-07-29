@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            text-align: center;
+            padding-top: 100px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        form {
+            display: inline-block;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 260px;
+            padding: 10px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 6px;
+            background: #ffffff;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background-color: #1e90ff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00bfff;
+        }
+
+        .error {
+            color: #ffaaaa;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .info {
+            margin-top: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 16px;
+            color: #e0e0e0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        a {
+            color: #ffdd57;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h2>👤 User Login</h2>
+
+    {% if error %}
+        <p class="error">❌ {{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <label>Username or Email:</label>
+        <input type="text" name="username" required>
+
+        <label>Password:</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p style="margin-top: 20px;">Don’t have an account? <a href="{% url 'register' %}">Register here</a></p>
+
+    <div class="info">
+        <h3>🚗 Why Login?</h3>
+        <p>As a registered user, you can enter real-time engine sensor values to predict whether your vehicle's engine is in good condition or needs attention.</p>
+        <p>Our system uses AI models like Random Forest, SVM, and Gradient Boosting to analyze data such as fuel rate, temperature, vibration, and more.</p>
+        <p>🔍 Get instant predictions and maintenance recommendations — avoid costly engine failures and stay on the road safely!</p>
+    </div>
+</body>
+</html>

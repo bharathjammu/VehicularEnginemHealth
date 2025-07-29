@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #373B44, #4286f4);
+            color: #f8f9fa;
+            text-align: center;
+            padding-top: 60px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #ffffff;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 12px 0;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        strong {
+            color: #ffdd57;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #00e5ff;
+            font-weight: bold;
+            padding: 10px 18px;
+            background-color: #263238;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #37474f;
+        }
+
+        .info {
+            margin-top: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 15px;
+            color: #f1f1f1;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>👤 User Profile</h2>
+
+    <p><strong>Username:</strong> {{ request.user.username }}</p>
+    <p><strong>Email:</strong> {{ request.user.email }}</p>
+    <p><strong>Phone:</strong> {{ profile.phone }}</p>
+    <p><strong>DOB:</strong> {{ profile.dob }}</p>
+    <p><strong>State:</strong> {{ profile.state }}</p>
+
+    <a href="{% url 'user_dashboard' %}">⬅ Back to Dashboard</a>
+
+    <div class="info">
+        <h3>💡 Why This Profile Matters?</h3>
+        <p>Your profile helps us deliver personalized engine diagnostics and maintenance recommendations.</p>
+        <p>Having up-to-date contact and location information ensures service alerts and reports are delivered accurately.</p>
+        <p>Engine health predictions are tied to your profile — ensuring history and insights are stored securely.</p>
+    </div>
+
+</body>
+</html>

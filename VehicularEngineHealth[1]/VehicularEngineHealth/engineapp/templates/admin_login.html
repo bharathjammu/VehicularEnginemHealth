@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login - Vehicular Engine Health</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #1f4037, #99f2c8);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        h2 {
+            margin-top: 80px;
+            font-size: 36px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        form {
+            margin-top: 30px;
+            display: inline-block;
+            padding: 25px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 250px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 25px;
+            background-color: #00c9a7;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #00b38f;
+        }
+
+        .error {
+            color: #ffcccc;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .info {
+            margin-top: 60px;
+            font-size: 16px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #f0f0f0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h2>🔐 Admin Login</h2>
+
+    {% csrf_token %}
+    {% if error %}<p class="error">❌ {{ error }}</p>{% endif %}
+
+    <form method="POST">{% csrf_token %}
+        <label>Username:</label>
+        <input type="text" name="username" required>
+
+        <label>Password:</label>
+        <input type="password" name="password" required>
+
+        <br>
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="info">
+        <h3>🛠️ Admin Capabilities</h3>
+        <p>As an administrator, you can upload datasets, train machine learning models, and monitor engine condition predictions made by the system.</p>
+        <p>This system analyzes vehicle sensor data using AI algorithms like <strong>Random Forest</strong>, <strong>SVM</strong>, and more to predict whether an engine is healthy or needs maintenance.</p>
+        <p>Ensure timely model training and accuracy checks to keep engine health diagnostics up to date.</p>
+    </div>
+</body>
+</html>

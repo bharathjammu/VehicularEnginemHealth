@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            color: #ffffff;
+            text-align: center;
+            padding-top: 60px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 34px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 40px;
+            animation: fadeInUp 1.2s ease-in-out;
+        }
+
+        li {
+            margin: 20px 0;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            background-color: #00c3ff;
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        a:hover {
+            background-color: #009ddc;
+        }
+
+        p a {
+            margin-top: 40px;
+            background: none;
+            color: #ffcccb;
+            font-weight: normal;
+        }
+
+        .info {
+            margin-top: 50px;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 16px;
+            color: #e0e0e0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Welcome, {{ request.user.username }}</h2>{% csrf_token %}
+
+    <ul>
+        <li><a href="{% url 'predict_engine_health' %}">🚗 Predict Engine Condition</a></li>
+        <li><a href="{% url 'user_profile' %}">👤 View Profile</a></li>
+        <li><a href="{% url 'view_recommendations' %}">📘 Info</a></li>
+        <li><a href="{% url 'user_logout' %}">Logout</a></li>
+    </ul>
+
+    <div class="info">
+        <h3>🔧 Your Dashboard at a Glance</h3>
+        <p>Use this dashboard to check your engine’s health, view personalized maintenance recommendations, and monitor your profile activity.</p>
+        <p>The system uses real-time sensor data like RPM, oil temperature, and vibrations to determine the engine's condition using AI models.</p>
+        <p>Regular checks help you keep your engine in peak condition and avoid costly repairs.</p>
+    </div>
+
+</body>
+</html>
